@@ -22,7 +22,30 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.Sidebar {
+  width: 340px;
+  height: 100%;
+}
+
+#breadcrumb {
+    padding: 10px 40px 16px;
+    list-style: none;
+    background-color: #eee;
+    font-size: 17px;
+    margin: 0;
+}
+
+#map-container {
+  height: 100%;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: calc(100% - 400px);
+}
+
+#map {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
 }
