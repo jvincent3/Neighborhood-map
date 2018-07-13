@@ -1,21 +1,18 @@
-import React from "react"
-import { compose, withProps } from "recompose"
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import React, { Component } from "react";
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+const google = window.google;
 
-const MyMapComponent = compose(
-  withProps({
-    googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyB6KuC_x__0u1uAEBxlPIb1LL-r7U8nFwQ",
-    loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `100vh` }} />,
-    mapElement: <div style={{ height: `100%` }} />,
-  }),
-  withScriptjs,
-  withGoogleMap
-)((props) =>
-  <GoogleMap
-    defaultZoom={8}
-    defaultCenter={props.center}
-    defaultOptions={{styles: [{elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+class Map extends Component {
+
+  render() {
+
+    const markers = this.props.markers || []
+
+    return (
+        <GoogleMap
+          defaultZoom={3}
+          defaultCenter={this.props.center}
+          defaultOptions={{styles: [{elementType: 'geometry', stylers: [{color: '#242f3e'}]},
             {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
             {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
             {
@@ -92,45 +89,14 @@ const MyMapComponent = compose(
               featureType: 'water',
               elementType: 'labels.text.stroke',
               stylers: [{color: '#17263c'}]
-            }]}}
-  >
-    {props.isMarkerShown && <Marker position={{ lat: 41.3851, lng: 2.1734 }} onClick={props.onMarkerClick} />}
-  </GoogleMap>
-)
-
-class Map extends React.PureComponent {
-  state = {
-    isMarkerShown: false,
-  }
-
-  componentDidMount() {
-    this.delayedShowMarker()
-  }
-
-  delayedShowMarker = () => {
-    setTimeout(() => {
-      this.setState({ isMarkerShown: true })
-    }, 3000)
-  }
-
-  handleMarkerClick = () => {
-    this.setState({ isMarkerShown: false })
-    this.delayedShowMarker()
-  }
-
-  render() {
-    return (
-    	<div id="map-container">
-	    	<div id="map">
-		      <MyMapComponent
-            center= {this.props.center}
-		        isMarkerShown={this.state.isMarkerShown}
-		        onMarkerClick={this.handleMarkerClick}
-		      />
-	      </div>
-      </div>
-    )
+            }]}}>
+          {markers.map((marker, index) => (
+            <Marker {...marker} />
+            )
+          )}
+        </GoogleMap>
+      )
   }
 }
 
-export default Map;
+export default withGoogleMap(Map);
