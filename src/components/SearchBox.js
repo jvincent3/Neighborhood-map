@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import './SearchBox.css'
 const google = window.google;
 
 class SearchBox extends Component {
 	render () {
 		return (
 			<input
+					className="Searchbox"
 			    ref={(c) => {
 			      if (!c) {
 			        return;
@@ -13,8 +15,8 @@ class SearchBox extends Component {
 			      searchBox.addListener('places_changed', ()=> {
 			        const places = searchBox.getPlaces();
 			        if (places.length > 0) {
-			          const position = places[0].geometry.location;
-			        
+			          const position = {lat: places[0].geometry.location.lat(), lng: places[0].geometry.location.lng()};
+			          this.props.updateCurrentLoc(position)
 			        }
 			      })
 			    }}

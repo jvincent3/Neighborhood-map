@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
-const google = window.google;
+import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 
 class Map extends Component {
 
@@ -12,6 +11,8 @@ class Map extends Component {
         <GoogleMap
           defaultZoom={3}
           defaultCenter={this.props.center}
+          zoom={12}
+          center={this.props.center}
           defaultOptions={{styles: [{elementType: 'geometry', stylers: [{color: '#242f3e'}]},
             {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
             {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
