@@ -5,13 +5,11 @@ class Map extends Component {
 
   render() {
 
-    const markers = this.props.markers || []
-
     return (
         <GoogleMap
           defaultZoom={3}
           defaultCenter={this.props.center}
-          zoom={12}
+          zoom={this.props.zoom}
           center={this.props.center}
           defaultOptions={{styles: [{elementType: 'geometry', stylers: [{color: '#242f3e'}]},
             {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
@@ -91,10 +89,10 @@ class Map extends Component {
               elementType: 'labels.text.stroke',
               stylers: [{color: '#17263c'}]
             }]}}>
-          {markers.map((marker, index) => (
-            <Marker {...marker} />
-            )
-          )}
+          {
+             this.props.markers.length && this.props.markers.map((place, index) =>
+                <Marker key={index} position={{lat: place.location.lat, lng: place.location.lng }} />)
+           }
         </GoogleMap>
       )
   }
