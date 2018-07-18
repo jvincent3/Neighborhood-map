@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Map from './components/Map.js';
 import * as FourSquareAPI from './api/FourSquareAPI'
 import Sidebar from './components/Sidebar.js';
-import request from 'request';
 import './App.css';
 
 class App extends Component {
