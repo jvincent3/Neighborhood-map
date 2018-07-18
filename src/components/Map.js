@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import Marker from './Marker'
+import { withGoogleMap, GoogleMap } from "react-google-maps";
 
 class Map extends Component {
 
@@ -90,8 +91,10 @@ class Map extends Component {
               stylers: [{color: '#17263c'}]
             }]}}>
           {
-             this.props.markers.length && this.props.markers.map((place, index) =>
-                <Marker key={index} position={{lat: place.location.lat, lng: place.location.lng }} />)
+             this.props.markers.length && this.props.markers.map((place, index) => (
+                <Marker key={index} place={place} position={{lat: place.location.lat, lng: place.location.lng }} />
+                )
+              )
            }
         </GoogleMap>
       )
