@@ -10,6 +10,7 @@ export const getData = search => {
 		    client_id: 'KS1YNFPQSMDAF4UGOGB5XJ4WU0YSDMCJRY2EAVZMFNDYNKI4',
 		    client_secret: 'NY5VL4R4CQXVHND1W0QSBWVJN3UZZFRUIZMWZECYMEP20MS5',
 		    ll: `${search.lat}, ${search.lng}`,
+		    query: 'food',
 		    v: '20180323',
 		    limit: 10,
 		    sortByDistance: 1
@@ -22,6 +23,5 @@ export const getData = search => {
 				alert("The place you're current searching doesn't exist: " + search);
 			}
 		});
-
 	});
-	}
+}
