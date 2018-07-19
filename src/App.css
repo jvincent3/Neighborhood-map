@@ -27,12 +27,34 @@
   height: 100%;
 }
 
+.Sidebar ul {
+  padding: 0;
+  color: white;
+}
+
+.Sidebar ul li {
+  list-style: none;
+  padding: 20px 0;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #23d423;
+  margin: 10px;
+}
+
+.Sidebar ul li:hover {
+  box-shadow: 0 0 20px #60ff60;
+  color: #60ff60;
+}
+
 #breadcrumb {
     padding: 10px 40px 16px;
     list-style: none;
-    background-color: #eee;
+    background-color: #203d40;
     font-size: 17px;
     margin: 0;
+}
+
+#breadcrumb h2 {
+  color: #23d423;
 }
 
 #map-container {
