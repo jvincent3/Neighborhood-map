@@ -22,9 +22,15 @@
   font-size: large;
 }
 
-.Sidebar {
+.Sidebar, .Topbar {
   width: 340px;
   height: 100%;
+  overflow: hidden;
+  padding: 10px 0px 16px;
+  list-style: none;
+  background-color: #203d40;
+  font-size: 17px;
+  margin: 0;
 }
 
 .Sidebar ul {
@@ -41,19 +47,11 @@
 }
 
 .Sidebar ul li:hover {
-  box-shadow: 0 0 20px #60ff60;
+  box-shadow: 0 0 30px #60ff60;
   color: #60ff60;
 }
 
-#breadcrumb {
-    padding: 10px 40px 16px;
-    list-style: none;
-    background-color: #203d40;
-    font-size: 17px;
-    margin: 0;
-}
-
-#breadcrumb h2 {
+.Topbar h2 {
   color: #23d423;
 }
 
@@ -62,7 +60,7 @@
   position: fixed;
   right: 0;
   top: 0;
-  width: calc(100% - 400px);
+  width: calc(100% - 340px);
 }
 
 #map {
@@ -70,4 +68,29 @@
   overflow: hidden;
   height: 100%;
   width: 100%;
+}
+
+@media screen and (max-width: 799px) {
+  .App {
+    grid-template-columns: 1fr;
+  }
+
+  .Sidebar, .Topbar {
+    width: 100%;
+  }
+
+  .Topbar {
+    order: 1;
+  }
+
+  .Sidebar {
+    order: 3;
+  }
+
+  #map-container {
+    order: 2;
+    width: 100vw;
+    height: 300px;
+    position: relative;
+  }
 }
