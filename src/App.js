@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Map from './components/Map.js';
-import * as FourSquareAPI from './api/FourSquareAPI'
+import * as FourSquareAPI from './api/FourSquareAPI';
 import Sidebar from './components/Sidebar.js';
 import './App.css';
 
@@ -29,13 +29,20 @@ class App extends Component {
 		);
 	}
 
+	updateCenter = (venue) => {
+		this.setState({
+			currentLocation: {lat: venue.location.lat, lng: venue.location.lng},
+			zoom: 18
+		})
+	}
+
   render() {
     return (
       <div className="App">
 				<div id="map-container">
 	        <Map
 	        center= { this.state.currentLocation }
-	        markers= {this.state.venues}
+	        venues= {this.state.venues}
 	        id="map"
 	        zoom={this.state.zoom}
 	        containerElement={<div style={{height: `100vh`}} />}
@@ -44,6 +51,8 @@ class App extends Component {
         </div>
         <Sidebar
         updateCurrentLoc = {this.updateCurrentLoc}
+        venues={this.state.venues}
+        updateCenter={this.updateCenter}
         />
       </div>
     );

@@ -91,7 +91,7 @@ class Map extends Component {
               stylers: [{color: '#17263c'}]
             }]}}>
           {
-             this.props.markers.length && this.props.markers.map((place, index) => (
+             this.props.venues.length && this.props.venues.map((place, index) => (
                 <Marker key={index} place={place} position={{lat: place.location.lat, lng: place.location.lng }} />
                 )
               )
