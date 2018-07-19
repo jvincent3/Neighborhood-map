@@ -8,9 +8,14 @@ class Sidebar extends Component {
 				<h2>Neighborhood Map</h2>
 				<SearchBox
 				updateCurrentLoc= {this.props.updateCurrentLoc}/>
-				<ul>
-					<li>Home</li>
+				<ul className="venuesList">
+					{
+						this.props.venues.map((place, index) => {
+							return <li onClick={() => {this.props.updateCenter(place)}}>{place.name}</li>
+						})
+					}
 				</ul>
+
 			</div>
 			);
 	}
