@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import MediaQuery from 'react-responsive';
 import Map from './components/Map.js';
 import * as FourSquareAPI from './api/FourSquareAPI';
 import Sidebar from './components/Sidebar.js';
+import Topbar from './components/Topbar.js'
 import './App.css';
 
 class App extends Component {
@@ -40,6 +42,7 @@ class App extends Component {
     return (
       <div className="App">
 				<div id="map-container">
+				<MediaQuery minDeviceWidth={800}>
 	        <Map
 	        center= { this.state.currentLocation }
 	        venues= {this.state.venues}
@@ -48,9 +51,22 @@ class App extends Component {
 	        containerElement={<div style={{height: `100vh`}} />}
 	        mapElement= {<div style={{height: `100%`}} />}
 	        />
+	      </MediaQuery>
+	      <MediaQuery maxDeviceWidth={799}>
+					<Map
+	        center= { this.state.currentLocation }
+	        venues= {this.state.venues}
+	        id="map"
+	        zoom={this.state.zoom}
+	        containerElement={<div style={{height: `300px`}} />}
+	        mapElement= {<div style={{height: `100%`}} />}
+	        />
+	      </MediaQuery>
         </div>
+        <Topbar
+				updateCurrentLoc = {this.updateCurrentLoc}
+        />
         <Sidebar
-        updateCurrentLoc = {this.updateCurrentLoc}
         venues={this.state.venues}
         updateCenter={this.updateCenter}
         />
