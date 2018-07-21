@@ -73,6 +73,9 @@
 @media screen and (max-width: 799px) {
   .App {
     grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 
   .Sidebar, .Topbar {
