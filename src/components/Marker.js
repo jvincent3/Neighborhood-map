@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Marker, InfoWindow} from "react-google-maps";
-import * as FourSquareAPI from '../api/FourSquareAPI';
+
+const google = window.google;
 
 class MarkerComponent extends Component {
 
@@ -15,19 +16,10 @@ class MarkerComponent extends Component {
 	      })
 	}
 
-	componentDidMount = async() => {
-		const venueId = this.props.place.id;
-		const venuePhoto = await FourSquareAPI.getPhoto(venueId);
-
-		await this.setStateAsync({
-			photo: `${venuePhoto.prefix}300x300${venuePhoto.suffix}`
-		})
-	}
-
 	render() {
 		return (
 			<div>
-				<Marker position={this.props.position} onClick={this.onToggleOpen}>
+				<Marker position={this.props.position} animation={google.maps.Animation.DROP} onClick={this.onToggleOpen}>
 					<div>
 						{this.state.show && <InfoWindow onCloseClick={this.onToggleOpen}>
 							<div>
