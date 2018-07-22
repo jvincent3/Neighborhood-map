@@ -4,10 +4,21 @@ class Sidebar extends Component {
 	render () {
 		return (
 			<div id="breadcrumb" className="Sidebar">
-				<ul className="venuesList">
+				<ul className="venuesList" aria-labelledby="breadcrumb">
 					{
 						this.props.venues.map((place, index) => {
-							return <li key={index} onClick={() => {this.props.updateCenter(place)}}>{place.name}</li>
+							return <li
+								tabindex={index}
+								key={index}
+								role="button"
+								onClick={() => {this.props.updateCenter(place)}}
+								onKeyPress={(e) => {
+									if (e.key === "Enter") {
+										e.preventDefault();
+										this.props.updateCenter(place);
+									}
+								}
+							}>{place.name}</li>
 						})
 					}
 				</ul>
