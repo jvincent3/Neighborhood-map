@@ -11,7 +11,7 @@ class App extends Component {
 	state = {
 		currentLocation: {lat: 41.3851, lng: 2.1734},
 		venues: [],
-		zoom: 2
+		zoom: 3
 	}
 
 	setStateAsync = (state) => {
@@ -20,8 +20,8 @@ class App extends Component {
 		});
 	}
 
-	updateCurrentLoc = async (currentLocation) => {
-		const reqVenues = await FourSquareAPI.getData(currentLocation);
+	updateCurrentLoc = async (currentLocation, query) => {
+		const reqVenues = await FourSquareAPI.getData(currentLocation, query);
 		await this.setStateAsync(
 			{
 				currentLocation,
@@ -65,6 +65,7 @@ class App extends Component {
         </div>
         <Topbar
 				updateCurrentLoc = {this.updateCurrentLoc}
+				currentLocation={this.state.currentLocation}
         />
         <Sidebar
         venues={this.state.venues}

@@ -4,7 +4,7 @@ const api = 'https://api.foursquare.com/v2/venues/';
 const clientId = 'KS1YNFPQSMDAF4UGOGB5XJ4WU0YSDMCJRY2EAVZMFNDYNKI4';
 const clientSecret = 'NY5VL4R4CQXVHND1W0QSBWVJN3UZZFRUIZMWZECYMEP20MS5';
 
-export const getData = search => {
+export const getData = (search, query) => {
 	return new 	Promise(resolve => {
 
 		request({
@@ -14,7 +14,7 @@ export const getData = search => {
 		    client_id: clientId,
 		    client_secret: clientSecret,
 		    ll: `${search.lat}, ${search.lng}`,
-		    query: 'food',
+		    query: query,
 		    v: '20180323',
 		    limit: 10,
 		    sortByDistance: 1
