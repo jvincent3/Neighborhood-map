@@ -8,7 +8,7 @@ class Sidebar extends Component {
 					{
 						this.props.venues.map((place, index) => {
 							return <li
-								tabindex={index}
+								tabIndex={index}
 								key={index}
 								role="button"
 								onClick={() => {this.props.updateCenter(place)}}
