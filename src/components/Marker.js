@@ -19,7 +19,6 @@ class MarkerComponent extends Component {
 							<div>
 								<h4>{this.props.place.name}</h4>
 								<p>{this.props.place.location.formattedAddress[0]}</p>
-								<img alt={`${this.props.place.name}`} src={this.state.photo ? this.state.photo : 'http://via.placeholder.com/300x300'}/>
 							</div>
 						</InfoBox>
 					</div>
