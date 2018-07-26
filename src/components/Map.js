@@ -3,11 +3,9 @@ import Marker from './Marker'
 import { withGoogleMap, GoogleMap } from "react-google-maps";
 
 class Map extends Component {
-  componentWillMount() {
-    console.log(this.props.venues);
-  }
 
   render() {
+
     return (
         <GoogleMap
           defaultZoom={3}
@@ -94,7 +92,7 @@ class Map extends Component {
             }]}}>
           {
              this.props.venues.length && this.props.venues.map((place, index) => (
-                <Marker key={index} place={place} focused={this.props.focusedVenues[index]} position={{lat: place.location.lat, lng: place.location.lng }} currentLocation={this.props.currentLocation} />
+                 <Marker toggleInfoBox={this.props.toggleInfoBox}  key={index} place={place} position={{lat: place.location.lat, lng: place.location.lng }} />
                 )
               )
            }
