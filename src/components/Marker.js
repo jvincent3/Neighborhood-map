@@ -15,13 +15,15 @@ class MarkerComponent extends Component {
 	      	show: !this.state.show,
 	      })
 	}
-
+	componentDidMount() {
+		console.log(this.props.focused)
+	}
 	render() {
 		return (
 			<div>
 				<Marker position={this.props.position} animation={google.maps.Animation.DROP} onClick={this.onToggleOpen}>
 					<div>
-						{this.state.show && <InfoWindow onCloseClick={this.onToggleOpen}>
+						{this.props.focused.focused && <InfoWindow onCloseClick={this.onToggleOpen}>
 							<div>
 								<h4>{this.props.place.name}</h4>
 								<p>{this.props.place.location.formattedAddress[0]}</p>
@@ -31,7 +33,7 @@ class MarkerComponent extends Component {
 					</div>
 				</Marker>
 			</div>
-			)
+		)
 	}
 }
 

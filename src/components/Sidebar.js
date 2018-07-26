@@ -11,7 +11,11 @@ class Sidebar extends Component {
 								tabIndex={index}
 								key={index}
 								role="button"
-								onClick={() => {this.props.updateCenter(place)}}
+								onClick={() => {
+									const location = {lat: place.location.lat, lng: place.location.lng}
+									this.props.updateCenter(place)
+									setTimeout(() => {this.props.updateFocus(location)}, 300)
+								}}
 								onKeyPress={(e) => {
 									if (e.key === "Enter") {
 										e.preventDefault();

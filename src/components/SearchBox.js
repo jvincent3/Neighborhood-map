@@ -6,7 +6,7 @@ class SearchBox extends Component {
 	render () {
 		return (
 			<input
-					className="Searchbox"
+				className="Searchbox"
 			    ref={(c) => {
 			      if (!c) {
 			        return;
@@ -21,7 +21,7 @@ class SearchBox extends Component {
 			      })
 			    }}
 			    placeholder="Search a place..."
-			    type="text"		    
+			    type="text"
 			  />
 			)
 	}
