@@ -11,68 +11,44 @@ class App extends Component {
 	state = {
 		currentLocation: {lat: 41.3851, lng: 2.1734},
 		venues: [],
-		zoom: 3,
-	}
+		zoom: 3
+	};
 
 	setStateAsync = (state) => {
-		this.venueFocusLoad(state.venues);
 		return new Promise((resolve) => {
 			this.setState(state, resolve)
 		});
-	}
+	};
 
 	updateCurrentLoc = async (currentLocation, query) => {
 		const reqVenues = await FourSquareAPI.getData(currentLocation, query);
-		await this.setStateAsync(
-			{
-				currentLocation,
-				venues: reqVenues,
-				zoom: 10
-			}
-		);
-	}
+		this.setState(() => ({ venues: reqVenues, currentLocation, zoom: 10 }));
+	};
 
-	updateCenter = (venue) => {
+	updateCenter = venue => {
 		this.setState({
 			currentLocation: {lat: venue.location.lat, lng: venue.location.lng},
 			zoom: 18
+		}, () => {
+
+			this.setState(() => ({
+				venues: this.state.venues.map(venueCurrent => {
+					venueCurrent.id === venue.id ? venueCurrent.verified = !venueCurrent.verified : venueCurrent.verified = false;
+					return venueCurrent;
+				})
+			}))
+
 		})
-	}
+	};
 
-	venueFocusLoad = (venues) => {
-		const focusedVenues = [];
-
-		venues.map((val, index) => {
-			focusedVenues.push({
-				loc: {lat: val.location.lat, lng: val.location.lng},
-				focused: false})
-		})
-
-		this.setState({
-			focusedVenues
-		})
-
-	}
-
-	updateVenueFocus = (currentLoc) => {
-		const focusedVenues = this.state.focusedVenues
-		focusedVenues.map(val => {
-			if (val.loc.lat === currentLoc.lat && val.loc.lng === currentLoc.lng) {
-
-				val.focused = true;
-
-			} else if (!val.loc.lat === currentLoc.lat && !val.loc.lng === currentLoc.lng) {
-				val.focused = false;
-				
-			}
-		})
-		console.log(focusedVenues)
-		this.setState({focusedVenues})
-	}
-
-
-
-
+	toggleInfobox = (id) => {
+		this.setState(() => ({
+			venues: this.state.venues.map(venueCurrent => {
+				venueCurrent.id === id ? venueCurrent.verified = !venueCurrent.verified : venueCurrent.verified = false;
+				return venueCurrent;
+			})
+		}))
+	};
 
   render() {
     return (
@@ -81,25 +57,25 @@ class App extends Component {
 				<MediaQuery minDeviceWidth={800}>
 	        <Map
 	        center= { this.state.currentLocation }
+			  updateCenter={this.updateCenter}
 	        venues= {this.state.venues}
-	        focusedVenues={this.state.focusedVenues}
 	        id="map"
 	        zoom={this.state.zoom}
-	        currentLocation={this.state.currentLocation}
 	        containerElement={<div style={{height: `100vh`}} />}
 	        mapElement= {<div style={{height: `100%`}} />}
+			  toggleInfoBox={this.toggleInfobox}
 	        />
 	      </MediaQuery>
 	      <MediaQuery maxDeviceWidth={799}>
 					<Map
 	        center= { this.state.currentLocation }
+			  updateCenter={this.updateCenter}
 	        venues= {this.state.venues}
-	        focusedVenues={this.state.focusedVenues}
 	        id="map"
 	        zoom={this.state.zoom}
-	        currentLocation={this.state.currentLocation}
 	        containerElement={<div style={{height: `300px`}} />}
 	        mapElement= {<div style={{height: `100%`}} />}
+			  toggleInfoBox={this.toggleInfobox}
 	        />
 	      </MediaQuery>
         </div>
@@ -108,7 +84,6 @@ class App extends Component {
 				currentLocation={this.state.currentLocation}
         />
         <Sidebar
-        updateFocus={this.updateVenueFocus}
         venues={this.state.venues}
         updateCenter={this.updateCenter}
         />
