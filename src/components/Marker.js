@@ -15,9 +15,9 @@ class MarkerComponent extends Component {
 			<div>
 				<Marker position={this.props.position} animation={this.props.place.verified ? google.maps.Animation.BOUNCE : null} onClick={() => this.props.toggleInfoBox(this.props.place.id)}>
 					<div>
-						<InfoBox options={{pixelOffset: new google.maps.Size(50, -300) , closeBoxURL: '' }} visible={this.props.place.verified}>
+						<InfoBox options={{pixelOffset: new google.maps.Size(-120, -200) , closeBoxURL: '',boxStyle: {width: "200px"} }} visible={this.props.place.verified}>
 							<div>
-								<h4>{this.props.place.name}</h4>
+								<h3 role="heading" role-level="7">{this.props.place.name}</h3>
 								<p>{this.props.place.location.formattedAddress[0]}</p>
 							</div>
 						</InfoBox>
